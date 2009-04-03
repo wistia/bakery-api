@@ -1,0 +1,32 @@
+Bakery API
+==================
+Ruby API for the Bakery. See http://doc.unraw.net.
+
+
+This is currently in the form of a Rails plugin. Drop it into
+vendor/plugins and you're off to the races.
+
+Configure it like so:
+
+Bakery::Configure.configure!(
+  :api_scheme => 'https',
+  :api_host => 'account.unraw.net',
+  :api_user => 'user',
+  :api_password => 'password',
+  :api_access_key => 'abc123',
+  :http_delivery_host => 'account.media.unraw.net',
+  :https_delivery_host => 'account.media.unraw.net')
+
+Then you can do stuff like extract and resize a jpeg still from a video asset.
+
+Bakery::Derivative.create(
+  :media_id => 123,
+  :extension => 'jpg',
+  :image_resize => '640',
+  :video_still_time => 15
+)
+
+
+
+=====================
+Copyright (c) 2009 Brendan Schwartz, released under the MIT license
