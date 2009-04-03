@@ -17,7 +17,16 @@ Bakery::Configure.configure!(
   :http_delivery_host => 'account.media.unraw.net',
   :https_delivery_host => 'account.media.unraw.net')
 
-Then you can do stuff like extract and resize a jpeg still from a video asset.
+
+Then you can do stuff like get info about an asset:
+
+  media = Bakery::Media.find(123)
+  media.extension #=> 'mov'
+  media.status #=> 1 (Bakery::Media::PROCESSING)
+  media.progress #=> 0.58
+
+
+Or extract and resize a jpeg still from a video asset:
 
 Bakery::Derivative.create(
   :media_id => 123,
