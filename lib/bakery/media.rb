@@ -12,6 +12,11 @@ module Bakery
     def self.find_by_foreign_id(fid)
       find(:first, :from => :find, :params => {:foreign_id => fid})
     end
+    
+    # find all media in a collection by their collection id (i.e. id of the original file, that has no parent)
+    def self.find_by_collection_id(cid)
+      find(:all, :from => :find, :params => {:collection_id => cid})
+    end
 
     # find a media by its (bakery) id
     def self.find_by_id(id)
