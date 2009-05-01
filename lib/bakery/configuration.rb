@@ -58,8 +58,8 @@ module Bakery
         self.config.merge!(options)
         
         Resource.site = api_url_root
-        Resource.site.user = api_user
-        Resource.site.password = api_password
+        Resource.site.user = URI.escape(api_user)
+        Resource.site.password = URI.escape(api_password)
         
         self
       end
