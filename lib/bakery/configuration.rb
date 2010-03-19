@@ -10,12 +10,14 @@ module Bakery
   #   :http_delivery_host   where is the http content being served from (e.g. media.wistia.com)
   #   :https_delivery_host  where is the ssl content being served from (e.g. secure.media.wistia.com)
   #   :use_https_delivery   use https delivery by default? true or false
+  #   :upload_scheme        http or https, defaults to http
+  #   :use_authenticated_urls   this option is not actually used in this plugin, it's for use in your app
   
   class Configuration
     cattr_accessor :config
     
     def self.initialize
-      self.config = {}
+      self.config = { :upload_scheme => 'http', :use_authenticated_urls => true }
     end
     
     class << self
@@ -27,6 +29,10 @@ module Bakery
         else
           super
         end
+      end
+  
+      def upload_url_root(options = {})
+        "#{options[:scheme] || upload_scheme}://#{options[:host] || api_host}"
       end
   
       def api_url_root(options = {})
@@ -47,7 +53,8 @@ module Bakery
       
       def valid_keys
         [ :api_scheme, :api_host, :api_user, :api_password, :api_access_key,
-          :http_delivery_host, :https_delivery_host, :use_https_delivery ]
+          :http_delivery_host, :https_delivery_host, :use_https_delivery, 
+          :upload_scheme, :use_authenticated_urls ]
       end
       
       # takes a hash of options and merges them with the current settings
