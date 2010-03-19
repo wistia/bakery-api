@@ -8,7 +8,7 @@ vendor/plugins and you're off to the races.
 
 Configure it like so:
 
-Bakery::Configure.configure!(
+Bakery::Configuration.configure!(
   :api_scheme => 'https',
   :api_host => 'account.unraw.net',
   :api_user => 'user',
